@@ -1,0 +1,70 @@
+.callout {
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+}
+
+.callout-success {
+    border-left-color: #28a745;
+}
+
+.callout-success h5 {
+    color: #28a745;
+}
+
+.callout-info {
+    border-left-color: #5bc0de;
+}
+
+.callout-info h5 {
+    color: #5bc0de;
+}
+
+.callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+.callout-warning h5 {
+    color: #f0ad4e;
+}
+
+.callout-danger {
+    border-left-color: #d9534f;
+}
+
+.callout-danger h5 {
+    color: #d9534f;
+}
+
+.label_more {
+    color: #666;
+}
+.label_more:hover {
+    color: #000;
+}
+.label_more::before {
+    font-family: Consolas, monaco, monospace;
+    font-weight: bold;
+    font-size: 15px;
+    content: "+";
+    vertical-align: text-top;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+    background: radial-gradient(ellipse at center, #CCC 50%, transparent 50%);
+}
+.expand_more {
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.2s;
+}
+.toggle_more {
+    display: none;
+    visibility: hidden;
+}
+.toggle_more:checked ~ .expand_more {
+    height: 100%;
+}
+.toggle_more:checked ~ .label_more::before {
+    content: "-";
+}

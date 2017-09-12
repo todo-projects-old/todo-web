@@ -1,0 +1,20 @@
+<div class="list-group">
+    {{#each tasks as |task|}}
+    <a href="#" class="{{marker_class task.attrs}}list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{task.name}}</h5>
+            {{!-- <a class="" data-toggle="collapse" href="#collapse_details_{{task.id}}" aria-expanded="false" aria-controls="collapse_details_{{task.id}}">
+                Link with href
+            </a> --}}
+            <small class="text-muted">3 days ago</small>
+        </div>
+        
+        {{!-- <input id="toggle_more_{{task.id}}" class="toggle_more" type="checkbox" checked>
+        <label class="label_more" for="toggle_more_{{task.id}}">Hidden Kitten</label> --}}
+        <section class="expand_more_" id="collapse_details_{{task.id}}">
+            <p class="mb-1">{{task.desc}}</p>
+            <small class="text-muted">id:<strong>{{task.id}}</strong> {{#each task.attrs as |attr|}}{{attr.name}}:<strong>{{attr.value}}</strong> {{/each}}</small>
+        </section>
+    </a>
+    {{/each}}
+</div>
