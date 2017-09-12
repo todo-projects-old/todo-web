@@ -8,15 +8,13 @@ let ui = {
         styles: [
             {
                 attr: {
-                    name: "status",
-                    value: "set"
+                    status: "set"
                 },
                 style: "danger"
             },
             {
                 attr: {
-                    name: "status",
-                    value: "done"
+                    status: "done"
                 },
                 style: "success"
             }
@@ -24,21 +22,46 @@ let ui = {
     }
 };
 
-hbs.registerHelper('marker_class', function(attrs, options) {
-    for (let attr of attrs) {
+hbs.registerHelper('marker_class', function(task, options) {
+    console.log(task);
+    for (let attr in task) {
         for (let item of ui.marker.styles) {
-            if (attr.name === item.attr.name && attr.value === item.attr.value) {
-                return new hbs.SafeString("callout callout-" + item.style + " ");
+            for (let name in item.attr) {
+                if (attr === name && task[attr] === item.attr[name]) {
+                    return new hbs.SafeString("callout callout-" + item.style + " ");
+                }
             }
         }
     }
 });
 
-hbs.registerHelper('ifAttr', function(attrs, name, value, options) {
-    for (let attr of attrs) {
-        if (attr.name === name && attr.value === value) {
+hbs.registerHelper('ifAttr', function(task, name, value, options) {
+    for (let attr in task) {
+        if (attr === name && task[attr] === value) {
             return options.fn(this);
         }
+    }
+    return options.inverse(this);
+});
+
+hbs.registerHelper('ifIn', function() {
+    let value = arguments[0];
+    let array = Array.prototype.slice.call(arguments, 1, -1);
+    let options = arguments[arguments.length - 1];
+
+    if (array.indexOf(value) >= 0) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+hbs.registerHelper('ifNotIn', function() {
+    let value = arguments[0];
+    let array = Array.prototype.slice.call(arguments, 1, -1);
+    let options = arguments[arguments.length - 1];
+
+    if (array.indexOf(value) < 0) {
+        return options.fn(this);
     }
     return options.inverse(this);
 });
